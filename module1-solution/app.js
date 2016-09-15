@@ -11,10 +11,11 @@
   function LunchCheckerController($scope){
 
     $scope.message = "";
+    $scope.formGroupClass = "";
+    $scope.textClass = "";
 
     $scope.showMessageLunchChecker = function(){
-      var elem = document.getElementById("lunch-menu").value;
-      var numElements = countElegibleElements(elem.split(","));
+      var numElements = countElegibleElements($scope.ElementsList);
       var result = printMessage(numElements);
 
       $scope.formGroupClass = result.formGroupClass;
@@ -23,7 +24,8 @@
     }
 
     function countElegibleElements(item){
-      return item.filter(function(n){ return n.trim() != ''; }).length;
+      if(item == undefined) return 0;
+      return item.split(",").filter(function(n){ return n.trim() != ''; }).length;
     }
 
     function printMessage(result){
